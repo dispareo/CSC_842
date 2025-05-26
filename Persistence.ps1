@@ -53,7 +53,7 @@ function Addmin {
     Write-Host "Adding the admin user "Dispareo").`n[*] The user name will be "dispareo" and the password will also be (surprise!~) "DispareoSecurity" .`nok, but did anyone appreciate the Dad joke using the "addmin" parameter? Just know there are plenty more when "
     try {
         New-LocalUser -Name 'Dispareo' -Description 'Definitely a valid admin account' -Password (ConvertTo-SecureString "DispareoSecurity" -AsPlainText -Force)
-        Add-LocalGroupMember -Group "Administrators" -Member "Persistent"
+        Add-LocalGroupMember -Group "Administrators" -Member "Dispareo"
 
     }
     catch {
